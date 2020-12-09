@@ -25,12 +25,14 @@ const ManageCoursePage = props => {
             courseActions.loadAuthors();
         }else if(slug) {
             setCourse(courseStore.getCourseBySlug(slug));
+            setAuthors(courseStore.getAuthors());
         }
         return () => courseStore.removeChangeListener(onChange);
     }, [courses.length, props.match.params.slug]);
 
     function onChange() {
         setCourses(courseStore.getCourses());
+        setAuthors(courseStore.getAuthors());
     }
 
     function handleChange(event) {
@@ -63,21 +65,14 @@ const ManageCoursePage = props => {
         })
 
     }
-    let notFound = true;
     return (
         <>
-        {notFound = true}
             <h2>Manage Course</h2>
             {/* Here is an example of prompting a user when they navigate away from the page. */}
             {/* <Prompt when={true} message="Are you sure you want to leave?" /> */}
-            {courses.map(course => {
-                if(course.slug === props.match.params.slug) {
-                    notFound = false;
-                    console.log(course);
-                    return <CourseForm key={course.id} course={course} onChange={handleChange} onSubmit={handleSubmit} errors={errors} />
-                }
-            })}
-            {notFound ? <div>Course not found....</div> : <></>}
+            {course.slug === props.match.params.slug ? 
+                <CourseForm key={course.id} authors={authors} course={course} onChange={handleChange} onSubmit={handleSubmit} errors={errors} /> : 
+                <div>Course not found....</div>}
         </>
     )
 }
