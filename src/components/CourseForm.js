@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import Dropdown from './common/Dropdown';
 
 function CourseForm(props) {
-  console.log(props.authors);
   return (
     <form onSubmit={props.onSubmit}>
       <TextInput 

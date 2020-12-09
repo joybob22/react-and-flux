@@ -70,7 +70,7 @@ const ManageCoursePage = props => {
             <h2>Manage Course</h2>
             {/* Here is an example of prompting a user when they navigate away from the page. */}
             {/* <Prompt when={true} message="Are you sure you want to leave?" /> */}
-            {course.slug === props.match.params.slug ? 
+            {course ? 
                 <CourseForm key={course.id} authors={authors} course={course} onChange={handleChange} onSubmit={handleSubmit} errors={errors} /> : 
                 <div>Course not found....</div>}
         </>
