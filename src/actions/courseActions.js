@@ -39,3 +39,12 @@ export function loadAuthors() {
         })
     })
 }
+
+export function createAuthor(author) {
+    return authorApi.saveAuthor(author).then(savedAuthor => {
+        dispatcher.dispatch({
+            actionType: actionTypes.CREATE_AUTHOR,
+            author: savedAuthor
+        })
+    })
+}
